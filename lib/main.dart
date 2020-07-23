@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/categories_screen.dart';
 import 'screens/category_meals.dart';
+import 'screens/meal_detail_screen.dart';
+import 'screens/tabs_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,10 +37,24 @@ class MyApp extends StatelessWidget {
       // home: CategoriesScreen(),
       // initialRoute: '/',
       routes:{
-        '/': (ctx)=>CategoriesScreen(),
-         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen()
+        '/': (ctx)=>TabsScreen(),
+         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+         MealDetailScreen.routeName: (ctx)=>MealDetailScreen(),
         // '/category-meals': (ctx) => CategoryMealsScreen(
         // )
+      },
+      // load categories screen if sny named route is not registered
+      onGenerateRoute: (settings){
+        // if(settings.name === '/meal-detail'){
+        //   return ...;
+        // }
+          return MaterialPageRoute(
+            builder:(ctx)=>CategoriesScreen(),
+          );      
+      },
+      // if onGenerate route is not defined
+      onUnknownRoute: (settings){
+            return MaterialPageRoute(builder:(ctx)=>CategoriesScreen(),);
       }
     );
   }
